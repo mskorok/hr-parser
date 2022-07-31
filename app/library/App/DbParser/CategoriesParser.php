@@ -48,6 +48,7 @@ class CategoriesParser extends BaseParser
                 $categoryTitle = $this->extractor->extractCategoryTitle($source, $html);
                 $htmlArray[] = ['path' => $path, 'html' => $html, 'title' => $categoryTitle];
             }
+            sleep(1);
         } while($html || $i > 1000);
 
         $this->saveCategories($source, $htmlArray);

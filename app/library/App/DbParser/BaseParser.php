@@ -70,6 +70,7 @@ abstract class BaseParser extends Injectable
                     Logger::log($exception->getMessage() . ' source: ' . $source->getId() . ' path: ' . $path);
                 }
             }
+            sleep(1);
         }
     }
 
@@ -100,7 +101,11 @@ abstract class BaseParser extends Injectable
         $fileName = basename($path);
         $pathName = self::$upload;
         $data = file_get_contents($path);
-        file_put_contents(self::$upload . $fileName, $data);
+        $wr = file_put_contents(self::$upload . $fileName, $data);
+        if (!$wr) {
+            return null;
+        }
+
         $image = new Images();
         $image->setPath($pathName);
         $image->setFileName($fileName);
