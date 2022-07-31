@@ -134,6 +134,7 @@ class ArticleSource extends Model
     public function setLanguageId(int $language_id): self
     {
         $this->language_id = $language_id;
+
         return $this;
     }
 
