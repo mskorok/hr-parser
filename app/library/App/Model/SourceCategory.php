@@ -104,6 +104,14 @@ class SourceCategory extends Model
     }
 
     /**
+     * @param int $parsed
+     */
+    public function setParsed(int $parsed): void
+    {
+        $this->parsed = $parsed;
+    }
+
+    /**
      * Returns the value of field id
      *
      * @return integer|null
