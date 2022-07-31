@@ -5,6 +5,7 @@ namespace App\DbParser;
 use App\Constants\Services;
 use App\Model\Articles;
 use App\Model\ArticleSource;
+use App\Model\Images;
 use App\Model\SourceCategory;
 use Phalcon\Di\Injectable;
 use RuntimeException;
@@ -16,6 +17,8 @@ abstract class BaseParser extends Injectable
      * @var Extractor
      */
     protected $extractor;
+
+    private static $upload = '/upload/articles/';
 
 
     public function __construct(Extractor $extractor)
@@ -90,10 +93,25 @@ abstract class BaseParser extends Injectable
 
     /**
      * @param string $path
-     * @return int
+     * @return int|null
      */
-    private function createImage(string $path): int
+    private function createImage(string $path): ?int
     {
-        return 1;
+        $fileName = basename($path);
+        $pathName = self::$upload;
+        $data = file_get_contents($path);
+        file_put_contents(self::$upload . $fileName, $data);
+        $image = new Images();
+        $image->setPath($pathName);
+        $image->setFileName($fileName);
+        try {
+            $image->save();
+            $image->refresh();
+
+            return $image->getId();
+        } catch (RuntimeException $e) {
+            Logger::log($e->getMessage());
+            return null;
+        }
     }
 }
