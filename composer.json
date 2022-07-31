@@ -25,7 +25,8 @@
         "phalcon/ide-stubs": "^3.4.3",
         "psr/log": "^1.0",
         "symfony/dom-crawler": "^3.4",
-        "symfony/http-client": "^4.4"
+        "symfony/http-client": "^4.4",
+      "ext-dom": "*"
     },
     "require-dev": {
         "codeception/codeception": "^2.1",

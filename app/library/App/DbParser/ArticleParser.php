@@ -30,7 +30,6 @@ class ArticleParser extends BaseParser
     private function processArticlesFromCategory(SourceCategory $source, ArticleSource $articleSource)
     {
         $xpath = $articleSource->getArticleXpath();
-        $html = $source->getHtml();
         $articlePaths = $this->extractor->extractArticlesUrl($source, $xpath);
         $this->saveArticles($articlePaths, $articleSource, $source);
     }
