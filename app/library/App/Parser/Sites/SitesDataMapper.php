@@ -22,7 +22,7 @@ abstract class SitesDataMapper extends \App\Parser\Base\DataMapper
      * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      */
-    public function setSiteContent()
+    public function setSiteContent(): bool
     {
         $source = ArticlesSource::findFirst([
             'conditions' => ' link LIKE "%' . $this->config->getBaseUrl() .  '%" '

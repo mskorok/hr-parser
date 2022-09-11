@@ -94,10 +94,9 @@ class Extractor implements ExtractorInterface
 
     /**
      * @param string $url
-     * @return string | null
-     *
+     * @return Articles|null
      */
-    public function extractArticle(string $url): ?string
+    public function extractArticle(string $url): ?Articles
     {
         $content = $this->dataMapper->getContent($url);
         $category = $this->dataMapper->mapCategory();
@@ -118,10 +117,10 @@ class Extractor implements ExtractorInterface
     /**
      * @desc Saving page data into storage (DB, file, etc)
      *
-     * @param ParsedInterface $article
+     * @param ParsedInterface|null $article
      * @return bool
      */
-    public function saveArticle(ParsedInterface $article = null)
+    public function saveArticle(ParsedInterface $article = null): bool
     {
         if ($article instanceof Articles || $article instanceof ArticlesSource) {
             $article->setParsed(1);
@@ -147,7 +146,7 @@ class Extractor implements ExtractorInterface
      * @return array
      *
      */
-    public function getPagesUrl()
+    public function getPagesUrl(): array
     {
         $this->articleUrls = $this->dataMapper->getPagesUrl();
         return $this->articleUrls;
@@ -157,7 +156,7 @@ class Extractor implements ExtractorInterface
      * @param string $url
      * @return string | null
      */
-    public function getCategory(string $url)
+    public function getCategory(string $url): ?string
     {
         return $this->categories[$url] ?? null;
 

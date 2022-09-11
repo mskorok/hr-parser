@@ -2,6 +2,11 @@
 namespace App\Parser\Sites;
 
 use App\Model\ArticlesSource;
+use Phalcon\Mvc\Model\ResultSetInterface;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 
 /**
@@ -48,7 +53,7 @@ class SitesParser extends \App\Parser\Base\ParserBase
 
     /**
      * @param $parsed
-     * @return ArticlesSource|ArticlesSource[]|\Phalcon\Mvc\Model\ResultSetInterface
+     * @return ArticlesSource|ArticlesSource[]|ResultSetInterface
      */
     protected function getSource($parsed)
     {
@@ -62,10 +67,10 @@ class SitesParser extends \App\Parser\Base\ParserBase
     }
 
     /**
-     * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+     * @throws ClientExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
      */
     protected function setSiteContent()
     {
