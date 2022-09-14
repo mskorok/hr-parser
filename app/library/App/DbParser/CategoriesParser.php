@@ -49,7 +49,7 @@ class CategoriesParser extends BaseParser
                 $htmlArray[] = ['path' => $path, 'html' => $html, 'title' => $categoryTitle];
             }
             sleep(1);
-        } while($html || $i > 1000);
+        } while($html || $i < static::MAX_PARSED);
 
         $this->saveCategories($source, $htmlArray);
 
@@ -97,16 +97,16 @@ class CategoriesParser extends BaseParser
         $i = 1;
 
         do {
-            $sourcePath = str_replace('{id}', $i, $sourcePath);
+            $_sourcePath = str_replace('{id}', $i, $sourcePath);
             $i++;
-            $html = $this->getHttpClient()->get($sourcePath);
+            $html = $this->getHttpClient()->get($_sourcePath);
             $articlePaths = $this->extractor->extractArticlesPath($source, $html);
 
             foreach ($articlePaths as $path) {
                 $paths[] = $path;
             }
 
-        } while ($html || $i > 1000);
+        } while ($html || $i < static::MAX_PARSED);
 
         $this->saveArticles($paths, $source);
     }

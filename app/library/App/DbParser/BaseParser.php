@@ -13,6 +13,8 @@ use RuntimeException;
 abstract class BaseParser extends Injectable
 {
 
+    protected const MAX_PARSED = 1000;
+
     /**
      * @var Extractor
      */
